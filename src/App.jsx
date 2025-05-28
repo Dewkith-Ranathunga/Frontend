@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Header from './components/header.jsx'
 import AdminPage from './pages/adminPage.jsx'
 import HomePage from './pages/homePage.jsx'
 import LoginPage from './pages/loginPage.jsx'
 import SignUpPage from './pages/signUpPage.jsx'
+import TestPage from './pages/testPage.jsx'
 
 
 function App() {
@@ -29,11 +29,12 @@ function App() {
 
     <BrowserRouter>
       <div>
-        <Header/>
+        {/* <Header/> */}
         <Routes path="/*">
           <Route path="/" element={<HomePage/>}/>
           <Route path="/signup" element={<SignUpPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
+          <Route path="/testing" element={<TestPage/>}/>
           <Route path="/admin/*" element={<AdminPage/>}/>
           <Route path="/*" element={<h1>404 Not found</h1>}/>
         </Routes>
