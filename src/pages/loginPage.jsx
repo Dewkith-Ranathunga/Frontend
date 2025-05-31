@@ -11,7 +11,7 @@ export default function LoginPage() {
     console.log("Email:", email);
     console.log("Password:", password);
     try {
-      const response = await axios.post("http://localhost:5000/user/login", {
+      const response = await axios.post("http://localhost:5000/api/user/login", {
         email: email,
         password: password,
       });
