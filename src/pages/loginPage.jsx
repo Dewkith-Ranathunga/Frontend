@@ -1,13 +1,23 @@
+import axios from "axios";
 import { useState } from "react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin(e) {
-    e.preventDefault();
+  async function handleLogin(e) {
+    e.preventDefault(); // Prevent page reload
     console.log("Email:", email);
     console.log("Password:", password);
+    try {
+      const response = await axios.post("http://localhost:5000/user/login", {
+        email: email,
+        password: password,
+      });
+      console.log("Login successful:", response);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   }
 
   return (
@@ -19,12 +29,18 @@ export default function LoginPage() {
           <h2 className="text-3xl font-bold mb-6">Login</h2>
           <form className="w-full flex flex-col gap-4" onSubmit={handleLogin}>
             <input
+              type="email"
+              placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
               className="w-full p-3 rounded-lg border border-gray-300"
               required
             />
             <input
+              type="password"
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
+              value={password}
               className="w-full p-3 rounded-lg border border-gray-300"
               required
             />
