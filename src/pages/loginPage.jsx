@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   async function handleLogin(e) {
     e.preventDefault(); // Prevent page reload
@@ -23,10 +25,10 @@ export default function LoginPage() {
       localStorage.setItem("token", response.data.token);
 
       // Redirect to admin dashboard if the user is an admin
-      if(response.data.isAdmin) {
-        window.location.href = "/admin";
+      if(response.data.role === "admin") {
+        navigate("/admin/");
       }else {
-        window.location.href = "/";
+       navigate("/");
       }
 
     } catch (e) {
