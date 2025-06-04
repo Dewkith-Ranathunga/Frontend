@@ -17,6 +17,7 @@ export default function LoginPage() {
       });
       toast.success("Login successful!");
       console.log(response.data);
+      localStorage.setItem("token", response.data.token);
     } catch (e) {
       toast.error(e.response.data.message);
     }
