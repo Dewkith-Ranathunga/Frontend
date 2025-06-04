@@ -15,9 +15,20 @@ export default function LoginPage() {
         email: email,
         password: password,
       });
+
       toast.success("Login successful!");
       console.log(response.data);
+
+      // Store the token in localStorage
       localStorage.setItem("token", response.data.token);
+
+      // Redirect to admin dashboard if the user is an admin
+      if(response.data.isAdmin) {
+        window.location.href = "/admin";
+      }else {
+        window.location.href = "/";
+      }
+
     } catch (e) {
       toast.error(e.response.data.message);
     }
