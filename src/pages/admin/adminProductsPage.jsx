@@ -5,7 +5,8 @@ import { sampleProducts } from "../../assets/sampleData.js";
 export default function AdminProductsPage() {
 
   const [products,setProducts] = useState(sampleProducts);
-
+  
+  // Fetch products from the backend
   useEffect(() => {
      axios.get(import.meta.env.VITE_BACKEND_URL + "/api/product").then((res) => {
     console.log(res.data);

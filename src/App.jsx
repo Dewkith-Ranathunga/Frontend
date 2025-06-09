@@ -50,3 +50,6 @@ function App() {
 }
 
 export default App
+
+//https://gracsrqabnkrrlzlktgj.supabase.co
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdyYWNzcnFhYm5rcnJsemxrdGdqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzNjc2OTMsImV4cCI6MjA2NDk0MzY5M30.9KTipwwOlABbKOMGdUvhkZ5bZUTUYGNhzTTJGrl0fEg
