@@ -1,24 +1,35 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { sampleProducts } from "../../assets/sampleData.js";
 
 export default function AdminProductsPage() {
+  const [products, setProducts] = useState(sampleProducts);
 
-  const [products,setProducts] = useState(sampleProducts);
-  
-  // Fetch products from the backend
   useEffect(() => {
-     axios.get(import.meta.env.VITE_BACKEND_URL + "/api/product").then((res) => {
-    console.log(res.data);
-    });
+    axios.get(import.meta.env.VITE_BACKEND_URL + "/api/product")
+      .then((res) => {
+        console.log(res.data);
+        // Uncomment when ready to update actual products
+        // setProducts(res.data);
+      })
+      .catch(err => console.error("Failed to fetch products:", err));
   }, []);
 
- 
-
   return (
-    <div className="w-full h-full  max-h-full overflow-y-scroll">
-      <table className="w-full text-center">
-        <thead>
+    <div className="relative w-full h-full max-h-full overflow-y-scroll p-4">
+      <Link
+        to="/admin/add-product"
+        className="absolute bottom-5 right-5 m-4 
+                 bg-blue-600 text-white text-xl px-4 py-2 
+                 rounded shadow-lg hover:bg-blue-700 
+                 transition duration-200 cursor-pointer"
+      >
+        +
+      </Link>
+
+      <table className="w-full text-center bg-white shadow rounded">
+        <thead className="bg-blue-100">
           <tr>
             <th>Product ID</th>
             <th>Product Name</th>
@@ -29,24 +40,18 @@ export default function AdminProductsPage() {
           </tr>
         </thead>
         <tbody>
-          {
-            products.map(
-            (item,index) => {
-              return(
-                <tr key={index}>
-                  <td>{item.productId}</td>
-                  <td>{item.name}</td>
-                  <td>
-                    <img src={item.images[0]} className="w-[50px] h-[50px]" />
-                  </td>
-                  <td>{item.labelledPrice}</td>
-                  <td>{item.price}</td>
-                  <td>{item.stock}</td>
-                </tr>
-              );
-            }
-            )
-          }
+          {products.map((item, index) => (
+            <tr key={index} className="border-t">
+              <td>{item.productId}</td>
+              <td>{item.name}</td>
+              <td>
+                <img src={item.images[0]} className="w-[50px] h-[50px] object-cover mx-auto" />
+              </td>
+              <td>{item.labelledPrice}</td>
+              <td>{item.price}</td>
+              <td>{item.stock}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
