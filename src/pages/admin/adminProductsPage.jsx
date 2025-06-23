@@ -10,8 +10,7 @@ export default function AdminProductsPage() {
     axios.get(import.meta.env.VITE_BACKEND_URL + "/api/product")
       .then((res) => {
         console.log(res.data);
-        // Uncomment when ready to update actual products
-        // setProducts(res.data);
+        setProducts(res.data);
       })
       .catch(err => console.error("Failed to fetch products:", err));
   }, []);
