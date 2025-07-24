@@ -57,7 +57,10 @@ export default function AdminProductsPage() {
               <td>
                 <div className='flex justify-center items-center w-full'>
                   <FaTrashAlt className='text-[20px] text-red-500 mx-2 cursor-pointer'/>
-                  <FaEdit onClick={() => navigate(`/admin/edit-product/`)} className='text-[20px] text-blue-500 mx-2 cursor-pointer'/>
+                  <FaEdit
+                      onClick={() => navigate(`/admin/edit-product/`, { state: item })}
+                      className='text-[20px] text-blue-500 mx-2 cursor-pointer'
+                    />
                 </div>
               </td>
             </tr>

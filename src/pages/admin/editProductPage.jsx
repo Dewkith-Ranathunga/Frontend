@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import mediaUpload from "../../utils/mediaUpload";
 
 export default function EditProductPage() {
@@ -14,6 +14,8 @@ export default function EditProductPage() {
 	const [price, setPrice] = useState(0);
 	const [stock, setStock] = useState(0);
 	const navigate = useNavigate();
+	const location = useLocation();
+	console.log(location);
 
 	async function UpdateProduct() {
 		const token = localStorage.getItem("token");
