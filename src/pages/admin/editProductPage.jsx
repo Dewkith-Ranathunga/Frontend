@@ -5,16 +5,17 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import mediaUpload from "../../utils/mediaUpload";
 
 export default function EditProductPage() {
-	const [productId, setProductId] = useState("");
-	const [name, setName] = useState("");
-	const [altNames, setAltNames] = useState("");
-	const [description, setDescription] = useState("");
-	const [images, setImages] = useState([]);
-	const [labelledPrice, setLabelledPrice] = useState(0);
-	const [price, setPrice] = useState(0);
-	const [stock, setStock] = useState(0);
-	const navigate = useNavigate();
 	const location = useLocation();
+	const [productId, setProductId] = useState(location.state.productId);
+	const [name, setName] = useState(location.state.name);
+	const [altNames, setAltNames] = useState(location.state.altNames.join(", "));
+	const [description, setDescription] = useState(location.state.description);
+	const [images, setImages] = useState([]);
+	const [labelledPrice, setLabelledPrice] = useState(location.state.labelledPrice);
+	const [price, setPrice] = useState(location.state.price); 
+	const [stock, setStock] = useState(location.state.stock);
+	const navigate = useNavigate();
+	
 	console.log(location);
 
 	async function UpdateProduct() {
@@ -24,18 +25,21 @@ export default function EditProductPage() {
 			return;
 		}
 
-		if (images.length <= 0) {
-			toast.error("Please select at least one image");
-			return;
-		}
+		let imageUrls = location.state.images;
 
-		const promiseArray = [];
+		const promiseArray = []; // If new images are selected, upload them
 		for (let i = 0; i < images.length; i++) {
 			promiseArray[i] = mediaUpload(images[i]);
 		}
 
 		try {
-			const imageUrls = await Promise.all(promiseArray);
+
+			if (images.length > 0) {
+				imageUrls = await Promise.all(promiseArray); 
+			}
+
+			console.log("Image URLs:", imageUrls);
+
 			const altNamesArray = altNames.split(",").map(name => name.trim());
 
 			const product = {
@@ -50,13 +54,13 @@ export default function EditProductPage() {
 			};
 
 			axios
-				.post(import.meta.env.VITE_BACKEND_URL + "/api/product", product, {
+				.put(import.meta.env.VITE_BACKEND_URL + "/api/product/" + productId, product, {
 					headers: {
 						Authorization: "Bearer " + token,
 					},
 				})
 				.then(() => {
-					toast.success("Product added successfully");
+					toast.success("Product updated successfully");
 					navigate("/admin/products");
 				})
 				.catch((e) => {
@@ -73,6 +77,7 @@ export default function EditProductPage() {
             <h1 className="text-2xl font-bold mb-4">Edit Product</h1>
 			<input
 				type="text"
+				disabled
 				placeholder="Product ID"
 				className="input input-bordered w-full max-w-xs"
 				value={productId}
