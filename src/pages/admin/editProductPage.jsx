@@ -25,7 +25,7 @@ export default function EditProductPage() {
 			return;
 		}
 
-		let imageUrls = location.state.images;
+		let imageUrls = location.state.images; // Use existing images if no new images are selected
 
 		const promiseArray = []; // If new images are selected, upload them
 		for (let i = 0; i < images.length; i++) {
