@@ -58,43 +58,49 @@ export default function AdminProductsPage() {
       >
         +
       </Link>
-
-      <table className="w-full text-center bg-white shadow rounded">
-        <thead className="bg-blue-100">
-          <tr>
-            <th>Product ID</th>
-            <th>Product Name</th>
-            <th>Product Image</th>
-            <th>Labelled Price</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((item, index) => (
-            <tr key={index} className="border-t">
-              <td>{item.productId}</td>
-              <td>{item.name}</td>
-              <td>
-                <img src={item.images[0]} className="w-[50px] h-[50px] object-cover mx-auto" />
-              </td>
-              <td>{item.labelledPrice}</td>
-              <td>{item.price}</td>
-              <td>{item.stock}</td>
-              <td>
-                <div className='flex justify-center items-center w-full'>
-                  <FaTrashAlt className='text-[20px] text-red-500 mx-2 cursor-pointer' onClick={() => deleteProduct(item.productId)} />
-                  <FaEdit
-                    onClick={() => navigate(`/admin/edit-product/`, { state: item })}
-                    className='text-[20px] text-blue-500 mx-2 cursor-pointer'
-                  />
-                </div>
-              </td>
+      
+      {isLoading ?
+      <div className='w-full h-full flex flex-col justify-center items-center py-20'>
+        <div className="w-[50px] h-[50px] border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+        <p className="text-blue-600 font-semibold text-lg mt-4">Loading products...</p>
+      </div> : (
+        <table className="w-full text-center bg-white shadow rounded">
+          <thead className="bg-blue-100">
+            <tr>
+              <th>Product ID</th>
+              <th>Product Name</th>
+              <th>Product Image</th>
+              <th>Labelled Price</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products.map((item, index) => (
+              <tr key={index} className="border-t">
+                <td>{item.productId}</td>
+                <td>{item.name}</td>
+                <td>
+                  <img src={item.images[0]} className="w-[50px] h-[50px] object-cover mx-auto" />
+                </td>
+                <td>{item.labelledPrice}</td>
+                <td>{item.price}</td>
+                <td>{item.stock}</td>
+                <td>
+                  <div className='flex justify-center items-center w-full'>
+                    <FaTrashAlt className='text-[20px] text-red-500 mx-2 cursor-pointer' onClick={() => deleteProduct(item.productId)} />
+                    <FaEdit
+                      onClick={() => navigate(`/admin/edit-product/`, { state: item })}
+                      className='text-[20px] text-blue-500 mx-2 cursor-pointer'
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
