@@ -33,13 +33,13 @@ function App() {
         <Toaster position='top-center'/> 
         {/* <Header/> */}
         <Routes path="/*">
-          <Route path="/" element={<HomePage/>}/>
+         {/*<Route path="/" element={<HomePage/>}/>  */}
           <Route path="/signup" element={<SignUpPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path="/testing" element={<TestPage/>}/>
           <Route path="/admin/*" element={<AdminPage/>}/>
           
-          <Route path="/*" element={<h1>404 Not found</h1>}/>
+          <Route path="/*" element={<HomePage/>}/>
         </Routes>
       </div>
     </BrowserRouter>
