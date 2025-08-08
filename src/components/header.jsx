@@ -5,18 +5,21 @@ export default function Header() {
     console.log("Header component is loading...");
 
     return (
-        <header className="w-full h-[80px] shadow-2xl relative flex items-center px-4">
+        <header className="w-full h-20 bg-white shadow-md px-6 flex items-center justify-between">
             <img
                 onClick={() => navigate("/")}
                 src="/logo.png"
                 alt="Logo"
-                className="h-[60px] w-[60px] object-cover mr-6 cursor-pointer"
+                className="h-14 w-14 object-cover cursor-pointer"
             />
-            <div className="flex gap-4">
-                <Link to="/">Home</Link>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
-            </div>
+            <nav className="flex gap-6 text-gray-700 font-medium">
+                <Link to="/" className="hover:text-blue-600 transition">Home</Link>
+                <Link to="/products" className="hover:text-blue-600 transition">Products</Link>
+                <Link to="/about" className="hover:text-blue-600 transition">About</Link>
+                <Link to="/contact" className="hover:text-blue-600 transition">Contact</Link>
+                <Link to="/search" className="hover:text-blue-600 transition">Search</Link>
+
+            </nav>
         </header>
     );
 }
