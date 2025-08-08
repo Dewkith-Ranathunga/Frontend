@@ -91,7 +91,7 @@ export default function AdminProductsPage() {
                   <div className='flex justify-center items-center w-full'>
                     <FaTrashAlt className='text-[20px] text-red-500 mx-2 cursor-pointer' onClick={() => deleteProduct(item.productId)} />
                     <FaEdit
-                      onClick={() => navigate(`/admin/edit-product/`, { state: item })}
+                      onClick={() => navigate(`/admin/edit-product/`, { state: item })} // Navigate to edit page with product data
                       className='text-[20px] text-blue-500 mx-2 cursor-pointer'
                     />
                   </div>
