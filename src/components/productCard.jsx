@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 export default function ProductCard({ product }) {
   return (
-    <div className="w-[300px] h-[400px] bg-white shadow-md rounded-lg overflow-hidden m-4 flex flex-col">
+    <Link to={`/overview/${product.productId}`} className="w-[300px] h-[400px] bg-white shadow-md rounded-lg overflow-hidden m-4 flex flex-col">
       {/* Image */}
       <div className="h-48 w-full overflow-hidden">
         {product.images && product.images.length > 0 ? (
@@ -54,6 +56,6 @@ export default function ProductCard({ product }) {
             : "Out of stock"}
         </p>
       </div>
-    </div>
+    </Link>
   );
 }

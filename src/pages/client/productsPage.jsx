@@ -23,7 +23,7 @@ export default function ProductsPage() {
         <div className="w-full h-full bg-green-50 flex flex-wrap justify-center items-center ">
             {
             products.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.productId} product={product} />
             ))
             }
         </div>
