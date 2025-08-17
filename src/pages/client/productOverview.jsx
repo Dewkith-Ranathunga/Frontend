@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import ImageSlider from "../../components/imageSlider.jsx"; // Assuming you have an ImageSlider component to display images
 
 export default function ProductOverviewPage() {
     const params = useParams();  // useParams is a hook that returns an object of key/value pairs of URL parameters
@@ -26,9 +27,18 @@ export default function ProductOverviewPage() {
     }, []);
 
   return (
-   <div className="bg-primary w-full h-full">
-        <h1>This is Overview Page for product : {productId}</h1>
-   </div>
+    <>
+    { status == "success" && (
+    <div className="w-full h-full flex">
+         <div className="w-[50%] h-full bg-amber-300">
+                <ImageSlider images={product.images} />
+        </div>
+            
+         <div className="w-[50%] h-full bg-blue-300">
+        </div>
+    </div>
+    )}
+   </>
   );
 }
 
