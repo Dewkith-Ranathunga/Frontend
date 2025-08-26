@@ -1,19 +1,25 @@
+import { useState } from "react";
+
 export default function ImageSlider(props) {
   const images = props.images;
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <div className="w-full h-64 overflow-hidden relative">
-      {images && images.length > 0 ? (
-        <img
-          src={images[0]}
-          alt="Product"
-          className="w-full h-full object-cover transition-transform duration-500 ease-in-out transform hover:scale-105"
-        />
-      ) : (
-        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
-          No Image
-        </div>
-      )}
+    <div className="w-full h-full flex flex-col">
+      <img src={images[currentIndex]} className="w-full flex-1 object-cover bg-gray-200" />
+
+      <div className="w-full h-[100px] bg-red-200">
+        {
+            images.map(
+                (image,index) => {
+                    return (
+                        <img key={index} className='w-[90px] h-[90px] m-2 rounded-2xl' src={image} />
+                    )
+                }
+            )
+            
+        }
+      </div>
     </div>
   );
 }
