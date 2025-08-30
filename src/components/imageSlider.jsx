@@ -8,16 +8,21 @@ export default function ImageSlider(props) {
     <div className="w-full h-full flex flex-col">
       <img src={images[currentIndex]} className="w-full flex-1 object-cover bg-gray-200" />
 
-      <div className="w-full h-[100px] bg-red-200">
+      <div className="w-full h-[100px] bg-red-200 flex overflow-x-auto">
         {
-            images.map(
-                (image,index) => {
-                    return (
-                        <img key={index} className='w-[90px] h-[90px] m-2 rounded-2xl' src={image} />
-                    )
+          images.map((image, index) => {
+            return (
+              <img
+                key={index}
+                className={
+                  'w-[90px] h-[90px] m-2 rounded-2xl object-cover cursor-pointer hover:border-4 hover:border-accent' +
+                  (index === currentIndex ? ' border-4 border-accent' : '')
                 }
+                src={image}
+                onClick={() => setCurrentIndex(index)}
+              />
             )
-            
+          })
         }
       </div>
     </div>
