@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import ImageSlider from "../../components/imageSlider.jsx";
 import Loading from "../../components/loading.jsx";
+import { addToCart, getCart } from "../../utils/cart.js";
 
 export default function ProductOverviewPage() {
   const params = useParams();
@@ -69,7 +70,16 @@ export default function ProductOverviewPage() {
               )}
 
               <div className="w-full flex justify-center items-center mt-4">
-                <button className="bg-blue-500 text-white py-2 px-4 rounded">
+                <button
+                  className="bg-blue-500 text-white py-2 px-4 rounded"
+                  onClick={() => {
+                    console.log("Before adding to cart:");
+                    console.log(getCart());
+                    addToCart(product, 1);
+                    console.log("After adding to cart:");
+                    console.log(getCart());
+                  }}
+                >
                   Add to Cart
                 </button>
                 <button className="bg-gray-500 text-white py-2 px-4 rounded ml-4">
