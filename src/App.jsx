@@ -2,10 +2,12 @@ import { Toaster } from 'react-hot-toast'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import AdminPage from './pages/adminPage.jsx'
+import CheckoutPage from './pages/client/checkOut.jsx'
 import HomePage from './pages/homePage.jsx'
 import LoginPage from './pages/loginPage.jsx'
 import SignUpPage from './pages/signUpPage.jsx'
 import TestPage from './pages/testPage.jsx'
+
 
 
 function App() {
@@ -38,6 +40,7 @@ function App() {
           <Route path='/login' element={<LoginPage/>}/>
           <Route path="/testing" element={<TestPage/>}/>
           <Route path="/admin/*" element={<AdminPage/>}/>
+          <Route path="/checkout" element={<CheckoutPage/>}/>
           
           <Route path="/*" element={<HomePage/>}/>
         </Routes>

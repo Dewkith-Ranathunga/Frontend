@@ -2,59 +2,67 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   return (
-    <Link to={`/overview/${product.productId}`} className="w-[300px] h-[400px] bg-white shadow-md rounded-lg overflow-hidden m-4 flex flex-col">
+    <Link to={"/overview/"+product.productId} className="w-[300px] h-[450px] bg-white shadow-lg rounded-lg m-4 overflow-hidden flex flex-col border border-gray-200 hover:shadow-xl transition-shadow duration-300">
       {/* Image */}
-      <div className="h-48 w-full overflow-hidden">
+      <div className="h-[200px] w-full bg-gray-100 flex items-center justify-center">
         {product.images && product.images.length > 0 ? (
           <img
             src={product.images[0]}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
-            No Image
-          </div>
+          <span className="text-gray-400">No Image</span>
         )}
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col flex-grow p-4">
-        {/* Name */}
-        <h2 className="text-lg font-semibold text-gray-800 truncate">{product.name}</h2>
-
-        {/* Alt Names */}
-        {product.altNames && product.altNames.length > 0 && (
-          <p className="text-sm text-gray-500 italic truncate">
-            Also known as: {product.altNames.join(", ")}
+      {/* Product Info */}
+      <div className="flex-1 p-4 flex flex-col justify-between">
+        <div>
+          <h2 className="text-lg font-semibold text-gray-800">{product.name}</h2>
+          <p className="text-sm text-gray-500 mt-1 h-[48px] overflow-hidden">
+            {product.description}
           </p>
-        )}
+        </div>
 
-        {/* Description */}
-        <p className="mt-2 text-gray-600 flex-grow overflow-hidden">
-          {product.description}
-        </p>
-
-        {/* Prices */}
-        <div className="mt-4 flex items-center gap-2">
-          <span className="text-xl font-bold text-green-600">
-            ${product.price.toFixed(2)}
-          </span>
-          {product.labelledPrice > product.price && (
-            <span className="text-sm line-through text-gray-400">
-              ${product.labelledPrice.toFixed(2)}
-            </span>
+        {/* Pricing */}
+        <div className="mt-3">
+          {product.labelledPrice !== product.price ? (
+            <div className="flex items-center gap-2">
+              <p className="text-red-500 font-bold text-lg">
+                Rs. {product.price.toLocaleString()}
+              </p>
+              <p className="text-gray-400 line-through text-sm">
+                Rs. {product.labelledPrice.toLocaleString()}
+              </p>
+            </div>
+          ) : (
+            <p className="text-gray-700 font-semibold text-lg">
+              Rs. {product.price.toLocaleString()}
+            </p>
           )}
         </div>
 
-        {/* Stock & Availability */}
-        <p className={`mt-2 font-medium ${
-          product.isAvailable && product.stock > 0 ? "text-green-600" : "text-red-600"
-        }`}>
-          {product.isAvailable && product.stock > 0
-            ? `In stock: ${product.stock}`
-            : "Out of stock"}
-        </p>
+        {/* Stock & Button */}
+        <div className="mt-4 flex items-center justify-between">
+          <span
+            className={`text-sm font-medium ${
+              product.isAvailable && product.stock > 0
+                ? "text-green-600"
+                : "text-red-500"
+            }`}
+          >
+            {product.isAvailable && product.stock > 0 ? "In Stock" : "Out of Stock"}
+          </span>
+
+          <button
+            disabled={!product.isAvailable || product.stock <= 0}
+            className="px-3 py-1 text-sm rounded-md text-white bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 transition"            
+          >
+            
+            {product.isAvailable && product.stock > 0 ? "Buy Now" : "Unavailable"}
+          </button>
+        </div>
       </div>
     </Link>
   );
