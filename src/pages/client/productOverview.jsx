@@ -102,22 +102,22 @@ export default function ProductOverviewPage() {
 
 								<button
 									className="w-[200px] h-[50px] mx-4 cursor-pointer bg-accent text-white rounded-2xl hover:bg-accent/80 transition-all duration-300"
-									// onClick={() => {
-									// 	navigate("/checkout", {
-									// 		state: {
-									// 			cart: [
-									// 				{
-									// 					productId: product.productId,
-									// 					name: product.name,
-									// 					image: product.images[0],
-									// 					price: product.price,
-									// 					labelledPrice: product.labelledPrice,
-									// 					qty: 1,
-									// 				},
-									// 			],
-									// 		},
-									// 	});
-									// }}
+									onClick={() => {
+										navigate("/checkout", {
+											state: {
+												cart: [
+													{
+														productId: product.productId,
+														name: product.name,
+														image: product.images[0],
+														price: product.price,
+														labelledPrice: product.labelledPrice,
+														qty: 1,
+													},
+												],
+											},
+										});
+									}}
 								>
 									Buy Now
 								</button>
