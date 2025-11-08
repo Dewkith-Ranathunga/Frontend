@@ -58,7 +58,7 @@ export default function CheckoutPage() {
 		}
 		try {
 			const res = await axios.post(
-				import.meta.env.VITE_BACKEND_URL + "/api/orders",
+				import.meta.env.VITE_BACKEND_URL + "/api/order",
 				orderInformation,
 				{
 					headers: {
